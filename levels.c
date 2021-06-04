@@ -131,12 +131,20 @@ int level8(FILE * socket_file,char ** buff, size_t size){
     return strcmp(*buff,"u^v\n") == 0;
 }
 
-void quine(){
-    
-}
-
 int level9(FILE * socket_file,char ** buff, size_t size){ //este es el de quine que creo que tecnicamente no tiene rta
     desafio("quine\n");
+    int res = system("gcc quine.c -o quine");
+    if(!res){ //existe el archivo quine
+        if((res = system("./quine | diff - quine.c")) == 0){
+            printf("¡Genial!, ya lograron meter un programa en quine.c, veamos si hace lo que corresponde.\n");
+            printf("La respuesta es chin_chu_lan_cha\n");
+        }else{
+            printf("diff encontró diferencias.\n");
+        }
+    }
+    if(res){ //diff retornó 1
+        printf("ENTER para reintentar.\n");
+    }
     paraInvestigar("¿Cuáles son las características del protocolo SCTP?\n");
     if(getline(buff,&size,socket_file) == -1){
         return -1;
