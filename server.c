@@ -3,40 +3,44 @@
 #include <netinet/in.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <unistd.h>
+#include "levels.h"
+
 #define MAX 80
-#define PORT 8081
+#define PORT 8080
 #define SA struct sockaddr
 
 // Function designed for chat between client and server.
 void func(int sockfd)
 {
-	char buff[MAX];
-	int n;
+	//char buff[MAX];
+	//int n;
 	// infinite loop for chat
-	for (;;) {
-		bzero(buff, MAX);
+	//for (;;) {
+		//bzero(buff, MAX);
 
 		// read the message from client and copy it in buffer
-		read(sockfd, buff, sizeof(buff));
+		level0(sockfd);
 		// print buffer which contains the client contents
-		printf("From client: %s", buff);
 		
 
 		// if msg contains "Exit" then server exit and chat ended.
-		if (strncmp("exit", buff, 4) == 0) {
-			printf("Server Exit...\n");
-			break;
-		}
-	}
+		// if (strncmp("exit", buff, 4) == 0) {
+		// 	printf("Server Exit...\n");
+		// 	break;
+		// }
+	//}
 }
 
 // Driver function
 int main()
 {
-	int sockfd, connfd, len;
+	int sockfd, connfd;
 	struct sockaddr_in servaddr, cli;
+	socklen_t addrlen;
 
 	// socket create and verification
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -68,10 +72,11 @@ int main()
 	}
 	else
 		printf("Server listening..\n");
-	len = sizeof(cli);
+
+	addrlen = sizeof(cli);
 
 	// Accept the data packet from client and verification
-	connfd = accept(sockfd, (SA*)&cli, &len);
+	connfd = accept(sockfd, (SA*)&cli, &addrlen);
 	if (connfd < 0) {
 		printf("server acccept failed...\n");
 		exit(0);
