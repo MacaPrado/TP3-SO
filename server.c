@@ -1,7 +1,8 @@
+#define _XOPEN_SOURCE 600
 #include <stdio.h>
+#include <stdlib.h>
 #include <netdb.h>
 #include <netinet/in.h>
-#include <stdlib.h>
 #include <string.h>
 #include <strings.h>
 #include <sys/socket.h>
@@ -11,28 +12,46 @@
 
 #define MAX 80
 #define PORT 8080
+#define MAX_LEVEL 12
 #define SA struct sockaddr
 
-// Function designed for chat between client and server.
+static int (*levels[MAX_LEVEL])(FILE * socket_file, char ** response, size_t size);
+static void loadLevels();
+
 void func(int sockfd)
 {
-	//char buff[MAX];
-	//int n;
-	// infinite loop for chat
-	//for (;;) {
-		//bzero(buff, MAX);
+	int level = 0,aux=0;
+	FILE * socket_file = fdopen(sockfd,"r");
+	char * response = malloc(sizeof(char) * MAX);
+	loadLevels();
+	while (level <= MAX_LEVEL && aux != -1){
+		memset(response, 0, MAX);
+		if( (aux = levels[level](socket_file,&response,MAX)) == 1){
+			level++;
+		}else{
+			printf("Respuesta incorrecta: %s\n", response);
+		}
+	}
+	free(response);
+	if(aux == -1){ //salio por un error
+		return; 
+	}
+	printf("termino yay!\n");
 
-		// read the message from client and copy it in buffer
-		level0(sockfd);
-		// print buffer which contains the client contents
-		
-
-		// if msg contains "Exit" then server exit and chat ended.
-		// if (strncmp("exit", buff, 4) == 0) {
-		// 	printf("Server Exit...\n");
-		// 	break;
-		// }
-	//}
+}
+static void loadLevels(){
+	levels[0] = level0;
+	levels[1] = level1;
+	levels[2] = level2;
+	levels[3] = level3;
+	levels[4] = level4;
+	levels[5] = level5;
+	levels[6] = level6;
+	levels[7] = level7;
+	levels[8] = level8;
+	levels[9] = level9;
+	levels[10] = level10;
+	levels[11] = level11;
 }
 
 // Driver function
@@ -50,7 +69,7 @@ int main()
 	}
 	else
 		printf("Socket successfully created..\n");
-	bzero(&servaddr, sizeof(servaddr));
+	memset(&servaddr, 0, sizeof(servaddr));
 
 	// assign IP, PORT
 	servaddr.sin_family = AF_INET;

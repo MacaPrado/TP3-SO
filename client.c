@@ -6,27 +6,26 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <arpa/inet.h>
-#define MAX 80
+#define MAX 30
 #define PORT 8080
 #define SA struct sockaddr
 void func(int sockfd)
 {
 	char buff[MAX];
 	int n;
-	for (;;) {
-		memset(buff,0,MAX);
-		printf("Enter the string : ");
-		n = 0;
-		while ((buff[n++] = getchar()) != '\n')
-			;
-        buff[n]=0;
-		write(sockfd, buff, sizeof(buff));
+	printf("Enter the string : ");
+	memset(buff,0,MAX);
+	for ( ;fgets(buff,MAX-1,stdin) != NULL; ) {
+		n = write(sockfd, buff, strlen(buff));
 		
-		if ((strncmp(buff, "exit", 4)) == 0) {
-			printf("Client Exit...\n");
-			break;
+		if (n < 0){
+			printf("Error in writing");
+			exit(1);
 		}
+		memset(buff, 0, MAX);
+		printf("Enter the string : ");
 	}
+
 }
 
 int main()
@@ -42,7 +41,7 @@ int main()
 	}
 	else
 		printf("Socket successfully created..\n");
-	bzero(&servaddr, sizeof(servaddr));
+	memset(&servaddr, 0, sizeof(servaddr));
 
 	// assign IP, PORT
 	servaddr.sin_family = AF_INET;
@@ -62,4 +61,5 @@ int main()
 
 	// close the socket
 	close(sockfd);
+	return 0;
 }
