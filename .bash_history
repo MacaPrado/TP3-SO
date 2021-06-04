@@ -134,3 +134,156 @@ make all
 man getLine
 man recv
 man getLine
+cd root/
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+sudo lsof -i -P -n | grep LISTEN
+netstat
+lsof
+netstat -tulpn | grep LISTEN
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+strace ./server
+./server
+strace ./server
+strace ./server
+strace ./server
+strace ./server
+strace ./server
+strace ./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+strace ./server
+strace ./server
+strace ./server
+strace ./server
+strace ./server
+strace ./server
+strace ./server
+strace ./server
+./server
+./server
+./server
+./server
+./server
+./server
+strace ./server
+strace ./server
+strace ./server
+strace ./server
+./server
+./server
+strace ./server
+strace ./server
+strace ./server
+strace ./server
+./server 13 > ans
+./server 13 > ans
+./server 13>ans
+./server 13>ans
+./server 13>ans
+./server 13>ans
+./server 13>ans
+strace ./server
+strace ./server
+./server 13 > ans
+strace ./server 13>ans
+./server 89>rta
+./server 1500>rta
+./server 1500>rta
+./server 1500>rta
+./server 1500>rta
+./server 1500>rta
+strace ./server 13>ans
+strace ./server 13>ans
+./server 13>rta
+./server 13>rta
+./server 13>rta
+./server 999>rta
+./server
+./server
+./server
+strings ./server
+strings ./server
+strings ./server
+strings -l ./server
+./server
+strings ./server
+strings ./server
+strings ./server
+strings ./server
+strings ./server
+strings ./server
+strings ./server
+strings ./server
+strings ./server
+strings ./server
+strings ./server
+./server
+./server 2>rta
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server 2>err
+./server 
+./server 

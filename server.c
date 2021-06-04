@@ -25,6 +25,7 @@ void func(int sockfd)
 	char * response = malloc(sizeof(char) * MAX);
 	loadLevels();
 	while (level <= MAX_LEVEL && aux != -1){
+	//	printf("\e[1;1H\e[2J");
 		memset(response, 0, MAX);
 		if( (aux = levels[level](socket_file,&response,MAX)) == 1){
 			level++;
@@ -57,7 +58,7 @@ static void loadLevels(){
 // Driver function
 int main()
 {
-	int sockfd, connfd;
+	int sockfd, connfd,opt=1;
 	struct sockaddr_in servaddr, cli;
 	socklen_t addrlen;
 
@@ -67,8 +68,11 @@ int main()
 		printf("socket creation failed...\n");
 		exit(0);
 	}
-	else
-		printf("Socket successfully created..\n");
+	if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1) {
+        perror("socket options settings failed\n");
+        exit(0);
+    }
+	printf("Socket successfully created..\n");
 	memset(&servaddr, 0, sizeof(servaddr));
 
 	// assign IP, PORT

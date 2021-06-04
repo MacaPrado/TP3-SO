@@ -4,11 +4,23 @@
 #include <strings.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 
 #define MAX_BUFFER 30
 
+#define BLACK_T "\x1b[30m"
+#define BLACK_F "\x1b[40m"
+#define RESET_COLOR "\x1b[0m"
+
 static void desafio(char * str);
 static void paraInvestigar(char * str);
+
+static char * too_easy;
+
+__attribute__((section(".RUN_ME")))
 
 int level0(FILE * socket_file,char ** buff, size_t size){
     printf(
@@ -47,8 +59,13 @@ int level2(FILE * socket_file,char ** buff, size_t size){
     return strcmp(*buff,"M4GFKZ289aku\n") == 0;
 }
 
-int level3(FILE * socket_file,char ** buff, size_t size){ //aca hay que hacer lo del pipe
-    desafio("EBADF..\n\nwrite: Bad file descriptor\n");
+int level3(FILE * socket_file,char ** buff, size_t size){ //como hacemos para imprimir el error
+    desafio("EBADF..\n");
+
+    if( write(13,"fk3wfLCm3QvS",strlen("fk3wfLCm3QvS")) == -1){ 
+        perror("write");
+    }
+    
     paraInvestigar("¿Qué útil abstracción es utilizada para comunicarse con sockets? ¿se puede utilizar read(2) y write(2) para operar?\n");
     if(getline(buff,&size,socket_file) == -1){
         return -1;
@@ -56,9 +73,10 @@ int level3(FILE * socket_file,char ** buff, size_t size){ //aca hay que hacer lo
     return strcmp(*buff,"fk3wfLCm3QvS\n") == 0;
 }
 
-int level4(FILE * socket_file,char ** buff, size_t size){ //aca hay que hacer lo de strings
+int level4(FILE * socket_file,char ** buff, size_t size){ //AL FINAL DEL TP PONER EL NUMERO DE LINEA
     desafio("respuesta = strings:277\n");
     paraInvestigar("¿Cómo garantiza TCP que los paquetes llegan en orden y no se pierden?\n");
+    too_easy = "too_easy";
     if(getline(buff,&size,socket_file) == -1){
         return -1;
     }
@@ -66,8 +84,9 @@ int level4(FILE * socket_file,char ** buff, size_t size){ //aca hay que hacer lo
 }
 
 int level5(FILE * socket_file,char ** buff, size_t size){
-    desafio(".data .bss .comment ? .shstrtab .symtab .strtab\n");
+    desafio(".init .text ? .fini .rodata\n");
     paraInvestigar("Un servidor suele crear un nuevo proceso o thread para atender las conexiones entrantes. ¿Qué conviene más?\n");
+    
     if(getline(buff,&size,socket_file) == -1){
         return -1;
     }
@@ -76,6 +95,16 @@ int level5(FILE * socket_file,char ** buff, size_t size){
 
 int level6(FILE * socket_file,char ** buff, size_t size){ //este es el de filter error.. siempre se genera la misma salida? digo para el printf porque por ahi hay que printear la salida de error o algo asi directamente
     desafio("Filter error\n\n");
+    char aux[30];
+    srand(time(NULL));
+    int i,r;
+    for(i=0 ; i<30 ; i++){
+        r = (rand() % 126);
+        aux[i] = r + '0';
+    }
+    aux[i-1]=0;
+    write(2,aux,strlen(aux));
+    write(1,"K5n2UFfpFMUN",9);
     paraInvestigar("¿Cómo se puede implementar un servidor que atienda muchas conexiones sin usar procesos ni threads?\n");
     if(getline(buff,&size,socket_file) == -1){
         return -1;
@@ -84,7 +113,8 @@ int level6(FILE * socket_file,char ** buff, size_t size){ //este es el de filter
 }
 
 int level7(FILE * socket_file,char ** buff, size_t size){ //este es el que la respuesta es .. esta como tapada en negro y tenes que seleccionar/cambiar el color de la terminal
-    desafio("¿?\n\nLa respuesta es BUmyYq5XxXGt\n");
+    desafio("¿?\n");
+    printf(BLACK_T BLACK_F "La respuesta es BUmyYq5XxXGt" RESET_COLOR "\n");
     paraInvestigar("¿Qué aplicaciones se pueden utilizar para ver el tráfico por la red?\n");
     if(getline(buff,&size,socket_file) == -1){
         return -1;
@@ -99,6 +129,10 @@ int level8(FILE * socket_file,char ** buff, size_t size){
         return -1;
     }
     return strcmp(*buff,"u^v\n") == 0;
+}
+
+void quine(){
+    
 }
 
 int level9(FILE * socket_file,char ** buff, size_t size){ //este es el de quine que creo que tecnicamente no tiene rta
@@ -134,6 +168,6 @@ static void desafio(char * str){
 }
 
 static void paraInvestigar(char * str){
-    printf("----- PREGUNTA PARA INVESTIGAR -----\n");
+    printf("\n----- PREGUNTA PARA INVESTIGAR -----\n");
     printf("%s\n",str);
 }
