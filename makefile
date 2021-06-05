@@ -1,5 +1,6 @@
 CC= gcc
 GCCFLAGS= -std=c99 -Wall -pedantic -fsanitize=address
+GCCLIBS= -lm
 
 SOURCES_SERVER= server.c
 SOURCES_CLIENT= client.c

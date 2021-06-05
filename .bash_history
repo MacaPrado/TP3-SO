@@ -287,3 +287,45 @@ strings ./server
 ./server 2>err
 ./server 
 ./server 
+cd root/
+ls
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+./server
+strings ./server > strings.txt
+./server
+rm strings.txt
+./server
+./server
+strings ./server > strings.txt
+strings ./server > strings.txt
+./server
+strings ./server > strings.txt
+./server
+./server
+./server
+./server
+exit
+cd root/
+ls
+./server
+./server
+./server
+strings ./server > strings.txt
+./server

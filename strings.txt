@@ -1,5 +1,4 @@
 /lib64/ld-linux-x86-64.so.2
-Eiyb
 libasan.so.1
 __gmon_start__
 _Jv_RegisterClasses
@@ -15,7 +14,7 @@ __asan_report_store_n
 memset
 __asan_report_load8
 free
-__asan_stack_malloc_2
+__asan_stack_malloc_3
 __asan_handle_no_return
 accept
 __asan_unregister_globals
@@ -23,18 +22,29 @@ __asan_register_globals
 getline
 strcmp
 write
+time
+__asan_report_store1
+strlen
+__asan_report_load1
+libm.so.6
+sqrt
 libc.so.6
 socket
 exit
 htonl
 htons
+srand
 perror
 puts
 listen
+getpid
 printf
 bind
+setsockopt
+system
 close
 fdopen
+sleep
 __libc_start_main
 _edata
 __bss_start
@@ -53,18 +63,21 @@ GLIBC_2.2.5
 %*6 
 %"6 
 fffff.
-=-? 
 AVAUATSH
 [A\A]A^]
 AVAUATSH
 [A\A]A^]
-%p$ 
+AVAUATSH
+[A\A]A^]
 []A\A]A^A_
 1 32 8 8 response 
+[1;1H
 Respuesta incorrecta: %s
-termino yay!
-3 32 4 7 addrlen 96 16 8 servaddr 160 16 3 cli 
+Felicitaciones, finalizaron el juego. Ahora deber
+n implementar el servidor que se comporte como el servidor provisto
+4 32 4 3 opt 96 4 7 addrlen 160 16 8 servaddr 224 16 3 cli 
 socket creation failed...
+socket options settings failed
 Socket successfully created..
 socket bind failed...
 Socket successfully binded..
@@ -74,17 +87,19 @@ server acccept failed...
 server acccept the client...
 levels
 server.c
-*.LC5
-*.LC10
-*.LC2
-*.LC1
-*.LC9
-*.LC3
-*.LC12
-*.LC7
 *.LC6
-*.LC8
+*.LC12
+*.LC4
+*.LC3
+*.LC7
+*.LC1
+*.LC10
 *.LC11
+*.LC14
+*.LC9
+*.LC8
+*.LC2
+*.LC13
 Bienvenidos al TP3 y felicitaciones, ya resolvieron el primer acertijo.
 En este TP deber
 n finalizar el juego que ya comenzaron resolviendo los desaf
@@ -118,17 +133,20 @@ til abstracci
 n es utilizada para comunicarse con sockets? 
 se puede utilizar read(2) y write(2) para operar?
 fk3wfLCm3QvS
-respuesta = strings:277
+respuesta = strings:405
 mo garantiza TCP que los paquetes llegan en orden y no se pierden?
 too_easy
-.data .bss .comment ? .shstrtab .symtab .strtab
+.init .text ? .fini .rodata
 Un servidor suele crear un nuevo proceso o thread para atender las conexiones entrantes. 
  conviene m
 .RUN_ME
+1 32 30 3 aux 
 Filter error
+K5n2UFfpFMUN
 mo se puede implementar un servidor que atienda muchas conexiones sin usar procesos ni threads?
 K5n2UFfpFMUN
-La respuesta es BUmyYq5XxXGt
+[30m
+[40mLa respuesta es BUmyYq5XxXGt
  aplicaciones se pueden utilizar para ver el tr
 fico por la red?
 BUmyYq5XxXGt
@@ -140,58 +158,82 @@ sockets es un mecanismo de IPC.
  es m
 s eficiente entre sockets y pipes?
 quine
+gcc quine.c -o quine
+Genial!, ya lograron meter un programa en quine.c, veamos si hace lo que corresponde.
+./quine | diff - quine.c
+La respuesta es chin_chu_lan_cha
+diff encontr
+ diferencias.
+ENTER para reintentar.
 les son las caracter
 sticas del protocolo SCTP?
 chin_chu_lan_cha
+gdb_rules
 b gdbme y encontr
  el valor m
 gico
+ENTER para reintentar.
  es un RFC?
 gdb_rules
+%.6f 
+Me conoces
 Fue divertido?
 normal
 ------------- DESAFIO -------------
 ----- PREGUNTA PARA INVESTIGAR -----
-*.LC13
+too_easy
 levels.c
-*.LC36
-*.LC25
-*.LC22
-*.LC27
-*.LC31
+*.LC51
+*.LC13
+*.LC42
+*.LC52
+*.LC28
+*.LC24
+*.LC30
+*.LC54
+*.LC40
 *.LC16
+*.LC25
 *.LC6
 *.LC12
-*.LC32
+*.LC37
 *.LC5
 *.LC10
 *.LC1
-*.LC28
+*.LC31
+*.LC38
 *.LC15
-*.LC26
+*.LC29
+*.LC34
 *.LC4
 *.LC2
 *.LC0
 *.LC7
-*.LC37
-*.LC38
+*.LC53
 *.LC11
+*.LC26
+*.LC44
+*.LC23
+*.LC32
 *.LC33
-*.LC21
-*.LC29
 *.LC19
 *.LC17
-*.LC23
-*.LC30
+*.LC39
 *.LC3
-*.LC14
-*.LC9
+*.LC50
+*.LC49
+*.LC41
+*.LC43
 *.LC8
-*.LC34
-*.LC20
-*.LC18
+*.LC45
+*.LC21
+*.LC9
 *.LC35
-*.LC24
+*.LC22
+*.LC36
+*.LC18
+*.LC14
+*.LC27
 ;*3$"
 GCC: (Debian 4.9.2-10+deb8u1) 4.9.2
 GCC: (Debian 4.8.4-1) 4.8.4
@@ -321,6 +363,7 @@ _ZN11__sanitizer10StackTrace15SlowUnwindStackEmm
 .rela.plt
 .init
 .text
+.RUN_ME
 .fini
 .rodata
 .eh_frame_hdr
@@ -358,8 +401,8 @@ _GLOBAL__sub_I_00099_1_func
 levels.c
 paraInvestigar
 desafio
-_GLOBAL__sub_D_00099_0_level0
-_GLOBAL__sub_I_00099_1_level0
+_GLOBAL__sub_D_00099_0_too_easy
+_GLOBAL__sub_I_00099_1_too_easy
 __FRAME_END__
 __JCR_END__
 _GLOBAL_OFFSET_TABLE_
@@ -374,7 +417,6 @@ _start
 close@@GLIBC_2.2.5
 __asan_init_v3
 level10
-__asan_stack_malloc_2
 getline
 __asan_report_load8
 __gmon_start__
@@ -387,8 +429,13 @@ _fini
 __asan_report_store_n
 level6
 __libc_start_main@@GLIBC_2.2.5
+system@@GLIBC_2.2.5
 malloc
 __local_asan_preinit
+cos@@GLIBC_2.2.5
+setsockopt@@GLIBC_2.2.5
+getpid@@GLIBC_2.2.5
+strlen
 _ITM_deregisterTMCloneTable
 level3
 _IO_stdin_used
@@ -396,33 +443,45 @@ _ITM_registerTMCloneTable
 __data_start
 level11
 __asan_handle_no_return
+__asan_stack_malloc_3
 listen@@GLIBC_2.2.5
 __asan_option_detect_stack_use_after_return
 fdopen@@GLIBC_2.2.5
 level7
+sleep@@GLIBC_2.2.5
+time
 write
 func
 __TMC_END__
 __dso_handle
 level8
 __libc_csu_init
+too_easy
 level0
 socket@@GLIBC_2.2.5
+gdbme
 memset
 __bss_start
 level4
+srand@@GLIBC_2.2.5
 level9
 _end
 __asan_unregister_globals
+normal
 level1
 strcmp
 __asan_register_globals
 bind@@GLIBC_2.2.5
 accept
+__asan_report_load1
 free
 htonl@@GLIBC_2.2.5
 perror@@GLIBC_2.2.5
+rand@@GLIBC_2.2.5
 _edata
+__asan_report_store1
+sqrt@@GLIBC_2.2.5
 level5
+log@@GLIBC_2.2.5
 main
 _init

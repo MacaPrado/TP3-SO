@@ -8,8 +8,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <math.h>
 
 #define MAX_BUFFER 30
+#define PI 3.141592653589793
 
 #define BLACK_T "\x1b[30m"
 #define BLACK_F "\x1b[40m"
@@ -18,7 +20,7 @@
 static void desafio(char * str);
 static void paraInvestigar(char * str);
 
-static char * too_easy;
+char too_easy = 1;
 
 __attribute__((section(".RUN_ME")))
 
@@ -59,7 +61,7 @@ int level2(FILE * socket_file,char ** buff, size_t size){
     return strcmp(*buff,"M4GFKZ289aku\n") == 0;
 }
 
-int level3(FILE * socket_file,char ** buff, size_t size){ //como hacemos para imprimir el error
+int level3(FILE * socket_file,char ** buff, size_t size){ 
     desafio("EBADF..\n");
 
     if( write(13,"fk3wfLCm3QvS",strlen("fk3wfLCm3QvS")) == -1){ 
@@ -73,10 +75,10 @@ int level3(FILE * socket_file,char ** buff, size_t size){ //como hacemos para im
     return strcmp(*buff,"fk3wfLCm3QvS\n") == 0;
 }
 
-int level4(FILE * socket_file,char ** buff, size_t size){ //AL FINAL DEL TP PONER EL NUMERO DE LINEA
-    desafio("respuesta = strings:277\n");
+int level4(FILE * socket_file,char ** buff, size_t size){
+    desafio("respuesta = strings:459\n");
     paraInvestigar("¿Cómo garantiza TCP que los paquetes llegan en orden y no se pierden?\n");
-    too_easy = "too_easy";
+    if(too_easy);
     if(getline(buff,&size,socket_file) == -1){
         return -1;
     }
@@ -93,7 +95,7 @@ int level5(FILE * socket_file,char ** buff, size_t size){
     return strcmp(*buff,".RUN_ME\n") == 0;
 }
 
-int level6(FILE * socket_file,char ** buff, size_t size){ //este es el de filter error.. siempre se genera la misma salida? digo para el printf porque por ahi hay que printear la salida de error o algo asi directamente
+int level6(FILE * socket_file,char ** buff, size_t size){ 
     desafio("Filter error\n\n");
     char aux[30];
     srand(time(NULL));
@@ -112,7 +114,7 @@ int level6(FILE * socket_file,char ** buff, size_t size){ //este es el de filter
     return strcmp(*buff,"K5n2UFfpFMUN\n") == 0;
 }
 
-int level7(FILE * socket_file,char ** buff, size_t size){ //este es el que la respuesta es .. esta como tapada en negro y tenes que seleccionar/cambiar el color de la terminal
+int level7(FILE * socket_file,char ** buff, size_t size){ 
     desafio("¿?\n");
     printf(BLACK_T BLACK_F "La respuesta es BUmyYq5XxXGt" RESET_COLOR "\n");
     paraInvestigar("¿Qué aplicaciones se pueden utilizar para ver el tráfico por la red?\n");
@@ -131,12 +133,12 @@ int level8(FILE * socket_file,char ** buff, size_t size){
     return strcmp(*buff,"u^v\n") == 0;
 }
 
-int level9(FILE * socket_file,char ** buff, size_t size){ //este es el de quine que creo que tecnicamente no tiene rta
+int level9(FILE * socket_file,char ** buff, size_t size){ 
     desafio("quine\n");
     int res = system("gcc quine.c -o quine");
     if(!res){ //existe el archivo quine
+        printf("¡Genial!, ya lograron meter un programa en quine.c, veamos si hace lo que corresponde.\n");
         if((res = system("./quine | diff - quine.c")) == 0){
-            printf("¡Genial!, ya lograron meter un programa en quine.c, veamos si hace lo que corresponde.\n");
             printf("La respuesta es chin_chu_lan_cha\n");
         }else{
             printf("diff encontró diferencias.\n");
@@ -152,23 +154,43 @@ int level9(FILE * socket_file,char ** buff, size_t size){ //este es el de quine 
     return strcmp(*buff,"chin_chu_lan_cha\n") == 0;
 }
 
+void gdbme(){
+    if(getpid()==4194305){
+        printf("gdb_rules\n");
+    }
+}
+
 int level10(FILE * socket_file,char ** buff, size_t size){
-    desafio("b gdbme y encontrá el valor mágico\n");
+    desafio("b gdbme y encontrá el valor mágico\n\n");
+    printf("ENTER para reintentar.\n\n");
     paraInvestigar("¿Qué es un RFC?\n");
+    gdbme();
     if(getline(buff,&size,socket_file) == -1){
         return -1;
     }
     return strcmp(*buff,"gdb_rules\n") == 0;
 }
 
-int level11(FILE * socket_file,char ** buff, size_t size){ //revisar si los numeros devueltos son siempre los mismos
+void normal(){
+    srand(time(NULL));
+    double x,y;
+    for(int i=0; i< 400 ;i++){
+        x = (double)rand() / (double)((unsigned)RAND_MAX + 1);
+        y = (double)rand() / (double)((unsigned)RAND_MAX + 1);
+        printf("%.6f ",(sqrt(-2 * log(x)) * cos(2 * M_PI * y)));
+    }
+}
+
+
+int level11(FILE * socket_file,char ** buff, size_t size){
+    desafio("Me conoces\n");
+    normal();
     paraInvestigar("¿Fue divertido?\n");
     if(getline(buff,&size,socket_file) == -1){
         return -1;
     }
     return strcmp(*buff,"normal\n") == 0;
 }
-
 
 static void desafio(char * str){
     printf("------------- DESAFIO -------------\n");

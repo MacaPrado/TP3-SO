@@ -24,21 +24,22 @@ void func(int sockfd)
 	FILE * socket_file = fdopen(sockfd,"r");
 	char * response = malloc(sizeof(char) * MAX);
 	loadLevels();
-	while (level <= MAX_LEVEL && aux != -1){
-	//	printf("\e[1;1H\e[2J");
+	while (level < MAX_LEVEL && aux != -1){
+		printf("\033[1;1H\033[2J");
 		memset(response, 0, MAX);
 		if( (aux = levels[level](socket_file,&response,MAX)) == 1){
 			level++;
 		}else{
 			printf("Respuesta incorrecta: %s\n", response);
+			sleep(1);
 		}
 	}
 	free(response);
 	if(aux == -1){ //salio por un error
 		return; 
 	}
-	printf("termino yay!\n");
-
+	printf("\033[1;1H\033[2J");
+	printf("Felicitaciones, finalizaron el juego. Ahora deberán implementar el servidor que se comporte como el servidor provisto\n");
 }
 static void loadLevels(){
 	levels[0] = level0;
