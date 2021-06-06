@@ -1,3 +1,5 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com/
 #define _GNU_SOURCE
 
 #include "levels.h"
@@ -63,11 +65,9 @@ int level2(FILE * socket_file,char ** buff, size_t size){
 
 int level3(FILE * socket_file,char ** buff, size_t size){ 
     desafio("EBADF..\n");
-
     if( write(13,"fk3wfLCm3QvS",strlen("fk3wfLCm3QvS")) == -1){ 
         perror("write");
     }
-    
     paraInvestigar("¿Qué útil abstracción es utilizada para comunicarse con sockets? ¿se puede utilizar read(2) y write(2) para operar?\n");
     if(getline(buff,&size,socket_file) == -1){
         return -1;
@@ -88,7 +88,6 @@ int level4(FILE * socket_file,char ** buff, size_t size){
 int level5(FILE * socket_file,char ** buff, size_t size){
     desafio(".init .text ? .fini .rodata\n");
     paraInvestigar("Un servidor suele crear un nuevo proceso o thread para atender las conexiones entrantes. ¿Qué conviene más?\n");
-    
     if(getline(buff,&size,socket_file) == -1){
         return -1;
     }

@@ -1,3 +1,5 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com/
 #define _XOPEN_SOURCE 600
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,6 +40,7 @@ void func(int sockfd)
 	if(aux == -1){ //salio por un error
 		return; 
 	}
+	printf("\033[1;1H\033[2J");
 	printf("\033[1;1H\033[2J");
 	printf("Felicitaciones, finalizaron el juego. Ahora deberán implementar el servidor que se comporte como el servidor provisto\n");
 }
